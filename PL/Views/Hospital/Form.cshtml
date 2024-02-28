@@ -1,0 +1,55 @@
+﻿@model ML.Hospital
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="justify-content-center">
+    <h2>Formulario de hospitales</h2>
+</div>
+<hr />
+<br />
+
+@using (Html.BeginForm("Form", "Hospital", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    <div class="row">
+        @Html.HiddenFor(model => model.IdHospital)
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Nombre)
+            @Html.TextBoxFor(model => model.Nombre, new{@class="form-control"})
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Direccion)
+            @Html.TextBoxFor(model => model.Direccion, new{@class="form-control"})
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.AnioConstruccion)
+            @Html.TextBoxFor(model => model.AnioConstruccion, new{@class="form-control"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Capacidad)
+            @Html.TextBoxFor(model => model.Capacidad, new{@class="form-control"})
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Especialidad)
+            @Html.DropDownListFor(model => model.Especialidad.IdEspecialidad, new SelectList(Model.Especialidad.Especialidades, "IdEspecialidad", "Nombre"), "Selecciona una especialidad", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="justify-content-center">
+        @if(Model.IdHospital > 0)
+        {
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-success">Agregar</button>
+        }
+        <a href="@Url.Action("GetAll", "Hospital")" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+

@@ -1,0 +1,48 @@
+﻿@model ML.Hospital
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="justify-content-center">
+    <h2>Lista de hospitales</h2>
+    <p>Seleccione el botón Agregar para agregar un nuevo hospital</p>
+</div>
+<hr />
+
+<div>
+    <a href="@Url.Action("Form", "Hospital")" class="btn btn-success"> Agregar</a>
+</div>
+
+<br />
+
+<div>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Editar</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Capacidad</th>
+                <th>AnioConstruccion</th>
+                <th>Especialidad</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(ML.Hospital hospital in Model.Hospitales)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Form", "Hospital", new{IdHospital=hospital.IdHospital})" class="btn btn-warning">Editar</a></td>
+                    <td>@hospital.Nombre</td>
+                    <td>@hospital.Direccion</td>
+                    <td>@hospital.Capacidad</td>
+                    <td>@hospital.AnioConstruccion</td>
+                    <td>@hospital.Especialidad.Nombre</td>
+                    <td><a href="@Url.Action("Delete", "Hospital", new{IdHospital=hospital.IdHospital})" class="btn btn-danger">Eliminar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
